@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Ameer Alghamdi | Software Engineer</title>
+<meta name="description" content="Portfolio of Ameer Ahmed Alghamdi, Software Engineering student at the University of Jeddah: backend development, software architecture, a published ASE 2026 paper, and a Top 20 winning project at the Hajj Future Innovations Camp 2026.">
+<meta property="og:title" content="Ameer Alghamdi | Software Engineer">
+<meta property="og:description" content="Backend development, software architecture, research, and selected projects.">
+<meta property="og:image" content="assets/profile.webp">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500&family=Noto+Naskh+Arabic:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a muted alpine scene (hazed ridgelines, spruce forest, fine snow) with editorial type set to the start edge; the snow slope runs into one 960px column where every block answers the pointer or the scroll. */
+:root{
+  color-scheme:light;
+  --bg:#f1f4f5; --surface:#ffffff; --line:#d0d9da; --fg:#18262a; --muted:#55666a;
+  --accent:#24564a; --accent-ink:#ffffff;
+  --sky1:#bfcdd6; --sky2:#edf1f2; --m1:#b9c8d1; --m2:#8fa5b2; --m3:#5c7481; --pine:#21403a; --pine2:#152b26; --snow:#fbfcfd; --sun:#ffffff; --night:0;
+  --display:"Fraunces","Noto Naskh Arabic",Georgia,serif;
+  --body:"IBM Plex Sans","IBM Plex Sans Arabic",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;
+  --bg:#0d1618; --surface:#131f22; --line:#25363a; --fg:#e4ecec; --muted:#8fa3a3;
+  --accent:#9ccdb9; --accent-ink:#0d1618;
+  --sky1:#060b14; --sky2:#182736; --m1:#27394a; --m2:#1e2f40; --m3:#162635; --pine:#0e201c; --pine2:#081411; --snow:#c4d1dd; --sun:#dfe7f0; --night:1;}}
+:root[data-theme="dark"]{color-scheme:dark;
+  --bg:#0d1618; --surface:#131f22; --line:#25363a; --fg:#e4ecec; --muted:#8fa3a3;
+  --accent:#9ccdb9; --accent-ink:#0d1618;
+  --sky1:#060b14; --sky2:#182736; --m1:#27394a; --m2:#1e2f40; --m3:#162635; --pine:#0e201c; --pine2:#081411; --snow:#c4d1dd; --sun:#dfe7f0; --night:1;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:400 1rem/1.7 var(--body);margin:0;overflow-x:hidden}
+[dir="rtl"] body{--display:"Noto Naskh Arabic","Fraunces",serif}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:960px;margin-inline:auto;padding-inline:20px}
+.mono{font:400 .74rem var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+[dir="rtl"] .mono{letter-spacing:0;font-family:var(--body);font-size:.85rem}
+.note{background:var(--accent);color:var(--accent-ink);font-size:.85rem;text-align:center;padding:6px 16px}
+.glow{position:fixed;left:0;top:0;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;pointer-events:none;z-index:1;background:radial-gradient(circle,color-mix(in srgb,var(--accent) 13%,transparent),transparent 65%);opacity:0;transition:opacity .4s}
+@media (pointer:coarse){.glow{display:none}}
+
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:blur(12px)}
+.bar{display:flex;align-items:center;gap:16px;padding-block:12px;flex-wrap:wrap}
+.brand{font:500 1.1rem var(--display);text-decoration:none}
+nav{display:flex;gap:22px;margin-inline-start:auto;flex-wrap:wrap}
+nav a{text-decoration:none;color:var(--muted);font-size:.88rem;position:relative}
+nav a::after{content:"";position:absolute;inset-inline:0;bottom:-4px;height:1px;background:var(--accent);transform:scaleX(0);transition:transform .3s}
+nav a:hover{color:var(--fg)}nav a:hover::after{transform:scaleX(1)}
+.tools{display:flex;gap:8px}
+.tbtn{font:500 .78rem var(--body);color:var(--fg);background:transparent;border:1px solid var(--line);border-radius:4px;padding:6px 12px;cursor:pointer}
+.tbtn:hover{border-color:var(--accent);color:var(--accent)}
+@media (max-width:640px){nav{display:none}.tools{margin-inline-start:auto}}
+
+.scene{position:relative;height:clamp(500px,80vh,720px);overflow:hidden}
+.scene canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.intro{position:relative;z-index:2;padding-block-start:clamp(30px,8vh,76px)}
+.meta{display:flex;gap:8px 22px;flex-wrap:wrap}
+h1{font:300 clamp(3rem,10vw,6.6rem)/.98 var(--display);margin:18px 0 14px;letter-spacing:-.03em}
+h1 em{font-style:italic;color:var(--accent)}
+[dir="rtl"] h1{font-weight:700;letter-spacing:0;line-height:1.3;font-size:clamp(2.6rem,8vw,5rem)}
+[dir="rtl"] h1 em{font-style:normal}
+.sub{font-size:clamp(1rem,2vw,1.15rem);color:var(--fg);margin:0;max-width:34em}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin-block-start:24px}
+.btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font:500 .9rem var(--body);padding:10px 20px;border-radius:4px;border:1px solid var(--fg);background:transparent;color:var(--fg);cursor:pointer;transition:background .25s,color .25s}
+.btn:hover{background:var(--fg);color:var(--bg)}
+.btn.pri{background:var(--fg);color:var(--bg)}
+.btn.pri:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+
+.intro-grid{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center}
+.portrait{width:clamp(130px,17vw,190px);height:auto;aspect-ratio:1;border-radius:50%;object-fit:cover;border:4px solid var(--surface);box-shadow:0 18px 40px -20px color-mix(in srgb,var(--fg) 60%,transparent)}
+@media (max-width:640px){.intro-grid{grid-template-columns:1fr}.portrait{order:-1;width:110px}.scene{height:auto;min-height:660px;padding-bottom:170px}}
+.award{display:inline-flex;align-items:center;gap:8px;font:500 .78rem var(--body);background:color-mix(in srgb,var(--accent) 12%,var(--surface));color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:999px;padding:4px 12px;margin-block:10px 4px}
+.gallery{display:grid;grid-template-columns:1.1fr 1fr 1fr;grid-template-rows:auto auto;gap:10px;margin-block-start:26px}
+.gallery figure{margin:0;position:relative;overflow:hidden;border-radius:6px;background:var(--surface);min-width:0}
+.gallery img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.gallery figure:hover img{transform:scale(1.04)}
+.gallery figcaption{position:absolute;inset-inline:0;bottom:0;padding:18px 12px 8px;font-size:.78rem;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.6))}
+.gallery .tall{grid-row:span 2;aspect-ratio:9/14}
+.gallery .wide{aspect-ratio:4/3}
+@media (max-width:640px){.gallery{grid-template-columns:1fr 1fr}.gallery .tall{grid-row:auto;aspect-ratio:3/4}}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);border-block:1px solid var(--line)}
+.facts div{padding:20px 4px;min-width:0}
+.facts strong{display:block;font:300 1.7rem/1.2 var(--display);font-variant-numeric:tabular-nums}
+.facts span{font-size:.82rem;color:var(--muted)}
+@media (max-width:640px){.facts{grid-template-columns:1fr 1fr}}
+
+section{padding-block:84px 0;position:relative;z-index:2}
+h2{font:300 clamp(2rem,4.8vw,3rem)/1.12 var(--display);margin:6px 0 26px;letter-spacing:-.02em;text-wrap:balance}
+[dir="rtl"] h2{font-weight:700;letter-spacing:0;line-height:1.5}
+h3{font:600 1.08rem/1.4 var(--body);margin:0}
+.about{font:300 clamp(1.3rem,2.9vw,1.9rem)/1.5 var(--display);max-width:26em;margin:0}
+[dir="rtl"] .about{font-weight:500;line-height:1.9}
+.about .w{opacity:.32;transition:opacity .3s}
+.about .w.on{opacity:1}
+.chip{font:500 .62em var(--mono);border:1px solid var(--line);border-radius:4px;padding:2px 9px;background:var(--surface);color:var(--accent);white-space:nowrap}
+
+/* cards answer the pointer */
+.spot{--mx:50%;--my:50%;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--surface);transition:transform .25s,border-color .25s}
+.spot::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(260px circle at var(--mx) var(--my),color-mix(in srgb,var(--accent) 16%,transparent),transparent 70%)}
+.spot:hover{border-color:var(--accent)}.spot:hover::before{opacity:1}
+
+.research{display:grid;grid-template-columns:1.5fr 1fr;overflow:hidden}
+.research>div{padding:28px;min-width:0;position:relative}
+.research p{color:var(--muted);margin:12px 0 18px}
+.stats{border-inline-start:1px solid var(--line);display:grid;gap:8px;align-content:center}
+.stats div{display:flex;align-items:baseline;gap:12px}
+.stats strong{font:300 1.8rem/1 var(--display);min-width:2.2ch;color:var(--accent);font-variant-numeric:tabular-nums}
+.stats span{color:var(--muted);font-size:.9rem}
+.links{display:flex;gap:8px;flex-wrap:wrap}
+.links a{font-size:.84rem;border:1px solid var(--line);border-radius:4px;padding:5px 13px;text-decoration:none;transition:border-color .2s,color .2s}
+.links a:hover{border-color:var(--accent);color:var(--accent)}
+@media (max-width:760px){.research{grid-template-columns:1fr}.stats{border-inline-start:0;border-block-start:1px solid var(--line)}}
+
+/* pipeline you can step through */
+.pipe{display:flex;flex-wrap:wrap;gap:6px;margin-block:22px 0;direction:ltr}
+.pipe button{font:500 .76rem var(--mono);border:1px solid var(--line);border-radius:4px;padding:8px 13px;background:var(--surface);color:var(--muted);cursor:pointer;transition:all .25s}
+.pipe button[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.pipe button.done{border-color:var(--accent);color:var(--accent)}
+.stepinfo{border-inline-start:2px solid var(--accent);padding:10px 16px;margin-block:14px 6px;min-height:4.2em;max-width:60ch}
+.stepinfo b{font:500 .74rem var(--mono);color:var(--accent);display:block}
+.feat ul{margin:18px 0 0;padding-inline-start:1.2em;color:var(--muted);display:grid;gap:8px;max-width:68ch}
+.grid2{display:grid;grid-template-columns:1fr;gap:18px;margin-block-start:40px}
+.card{padding:24px;min-width:0}
+.card>*{position:relative}
+.card p{color:var(--muted);margin:10px 0 14px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{font:400 .74rem var(--mono);color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:3px 9px;transition:all .2s}
+@media (max-width:720px){.grid2{grid-template-columns:1fr}}
+
+/* live walkthroughs */
+.duo{display:grid;grid-template-columns:auto 1fr;gap:36px;align-items:start;margin-block-start:22px}
+.duo>*{min-width:0}
+.feat{padding:18px;margin-inline:-18px;border-radius:6px;border:1px solid transparent}
+.feat+.feat{margin-block-start:40px}
+.demo{position:relative}
+.demo .frame{position:relative;overflow:hidden;background:var(--surface);border:1px solid var(--line);box-shadow:0 24px 50px -28px color-mix(in srgb,var(--fg) 55%,transparent)}
+.demo.phone{width:250px;max-width:100%}
+.demo.phone .frame{aspect-ratio:480/944;border-radius:30px;border:7px solid var(--fg)}
+.demo.web .frame{aspect-ratio:1280/664;border-radius:0 0 6px 6px}
+.demo .chrome{display:flex;align-items:center;gap:6px;padding:8px 12px;border:1px solid var(--line);border-block-end:0;border-radius:6px 6px 0 0;background:var(--surface);direction:ltr}
+.demo .chrome i{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.demo .chrome span{margin-inline-start:10px;font:400 .72rem var(--mono);color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.demo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;opacity:0;transform:scale(1.03);transition:opacity .6s,transform .9s cubic-bezier(.2,.7,.2,1)}
+.demo img.on{opacity:1;transform:none}
+.demo .tap{position:absolute;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;background:color-mix(in srgb,var(--accent) 35%,transparent);border:2px solid #fff;box-shadow:0 0 0 1px var(--accent);opacity:0;pointer-events:none}
+.demo .tap.go{animation:tap 1s ease-out both}
+@keyframes tap{0%{opacity:0;transform:scale(1.8)}35%{opacity:1;transform:scale(1)}60%{transform:scale(.8)}100%{opacity:0;transform:scale(1.5)}}
+.demo .segs{display:flex;gap:4px;margin-block-start:12px;direction:ltr}
+[dir="rtl"] .demo .segs{flex-direction:row-reverse}
+.demo .segs button{flex:1;height:14px;padding:0;border:0;background:transparent;cursor:pointer;position:relative}
+.demo .segs button::before,.demo .segs button::after{content:"";position:absolute;inset-inline:0;top:6px;height:2px;background:var(--line)}
+.demo .segs button::after{background:var(--accent);transform:scaleX(0);transform-origin:left}
+[dir="rtl"] .demo .segs button::after{transform-origin:right}
+.demo .segs button.past::after{transform:scaleX(1)}
+.demo .segs button.now::after{animation:fill var(--dur,3.2s) linear both}
+.demo.paused .segs button.now::after{animation-play-state:paused}
+@keyframes fill{to{transform:scaleX(1)}}
+.demo .cap{display:flex;gap:10px;align-items:baseline;margin-block-start:6px;min-height:3.4em;font-size:.9rem;color:var(--muted)}
+.demo .cap b{font:500 .72rem var(--mono);color:var(--accent);white-space:nowrap}
+.demo .pp{font:500 .72rem var(--mono);background:transparent;border:1px solid var(--line);border-radius:4px;color:var(--muted);padding:3px 9px;cursor:pointer;margin-inline-start:auto}
+.demo .pp:hover{border-color:var(--accent);color:var(--accent)}
+.demo.web{margin-block-start:22px}
+@media (max-width:720px){.duo{grid-template-columns:1fr}.demo.phone{margin-inline:auto}}
+@media (prefers-reduced-motion:reduce){.demo .segs button.now::after{animation:none;transform:scaleX(1)}.demo .tap{display:none}}
+
+.skills{display:grid;grid-template-columns:repeat(3,1fr);gap:26px 28px}
+.skills h3{font-size:.92rem;margin-block-end:10px}
+.skills .tags span{cursor:default}
+.skills .tags span[data-u]{cursor:pointer;color:var(--fg)}
+.skills .tags span.hot{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.used{margin-block-start:26px;padding-block:12px;border-block:1px solid var(--line);font-size:.92rem;color:var(--muted);min-height:3.2em}
+.used b{color:var(--accent);font-weight:600}
+.proj-hot{border-color:var(--accent)!important;box-shadow:0 0 0 1px var(--accent)}
+@media (max-width:720px){.skills{grid-template-columns:1fr 1fr}}
+@media (max-width:440px){.skills{grid-template-columns:1fr}}
+
+.profile{display:block;width:100%;height:auto;overflow:visible}
+[dir="rtl"] .profile{transform:scaleX(-1)}
+.profile .hill{fill:var(--m1);opacity:.5}
+.profile .base{fill:none;stroke:var(--line);stroke-width:2;stroke-dasharray:5 8}
+.profile .trail{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:0}
+.profile circle{fill:var(--surface);stroke:var(--accent);stroke-width:2.5;transition:r .25s,fill .25s}
+.profile circle.hot{r:13;fill:var(--accent)}
+.way a{font-size:.85rem;color:var(--accent)}
+.way{list-style:none;margin:22px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:0 24px;counter-reset:w}
+.way li{counter-increment:w;min-width:0;border-block-start:1px solid var(--line);padding-block:14px 18px;transition:border-color .25s}
+.way li:hover{border-color:var(--accent)}
+.way li::before{content:"0" counter(w);font:500 .74rem var(--mono);color:var(--accent);display:block}
+.way p{margin:2px 0 0;color:var(--muted);font-size:.9rem}
+@media (max-width:720px){.way{grid-template-columns:1fr 1fr}}
+@media (max-width:440px){.way{grid-template-columns:1fr}}
+
+.contact{margin-block-start:96px;padding-block:8px 44px;position:relative;z-index:2}
+.contact p{color:var(--muted);max-width:56ch;margin:0}
+.mail{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-block:24px}
+.mail code{font:300 clamp(1.1rem,4vw,2rem) var(--display);user-select:all;overflow-wrap:anywhere}
+.ridgefoot{display:block;width:100%;height:70px}
+footer{background:var(--pine2);color:#d6e2df;font-size:.85rem}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-block:18px 34px}
+
+.alt{position:fixed;inset-block-end:calc(16px + env(safe-area-inset-bottom,0px));inset-inline-start:16px;z-index:15;font:500 .72rem var(--mono);color:var(--muted);font-variant-numeric:tabular-nums;direction:ltr;background:color-mix(in srgb,var(--bg) 85%,transparent);padding:4px 8px;border-inline-start:2px solid var(--accent)}
+.rise{transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.rise.wait{transform:translateY(18px)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}.about .w{opacity:1}.rise.wait{transform:none}}
+</style>
+
+</head>
+<body>
+<div class="glow" id="glow"></div>
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="#home" data-k="brand">Ameer Alghamdi</a>
+    <nav aria-label="Primary">
+      <a href="#research" data-k="n1">Research</a>
+      <a href="#projects" data-k="n2">Projects</a>
+      <a href="#skills" data-k="n3">Skills</a>
+      <a href="#climb" data-k="n4">Journey</a>
+      <a href="#contact" data-k="n5">Contact</a>
+    </nav>
+    <div class="tools">
+      <button class="tbtn" id="langBtn" type="button">عربي</button>
+      <button class="tbtn" id="themeBtn" type="button">Night</button>
+    </div>
+  </div>
+</header>
+
+<div class="scene" id="home">
+  <canvas id="scene" aria-hidden="true"></canvas>
+  <div class="wrap intro">
+   <div class="intro-grid">
+   <div>
+    <div class="meta mono"><span data-k="m1">Software Engineering</span><span data-k="m2">Jeddah, Saudi Arabia</span><span data-k="avail">CO-OP from January 2027</span></div>
+    <h1 data-k="name">Ameer<br><em>Alghamdi</em></h1>
+    <p class="sub" data-k="lead">Backend development, software architecture, and systems that stay calm under load.</p>
+    <div class="cta">
+      <a class="btn pri" href="#projects" data-k="cta1">View projects</a>
+      <a class="btn" href="files/Ameer_Ahmed_Alghamdi_CV.pdf" download data-k="cta2">Download CV</a>
+    </div>
+   </div>
+   <img class="portrait" src="assets/profile.webp" alt="Ameer Alghamdi" width="190" height="190">
+   </div>
+  </div>
+</div>
+
+<main class="wrap">
+  <div class="facts">
+    <div><strong>4.94 / 5</strong><span data-k="f1">GPA, University of Jeddah</span></div>
+    <div><strong>ASE 2026</strong><span data-k="f2">Published research paper</span></div>
+    <div><strong>Top 20</strong><span data-k="f3">Hajj Future Innovations Camp 2026</span></div>
+    <div><strong data-k="f4a">1st Place</strong><span data-k="f4">Project in Three Minutes</span></div>
+  </div>
+
+  <section id="about">
+    <div class="mono" data-k="e0">Profile</div>
+    <p class="about" id="aboutText" data-k="about">I like the parts of software engineering where structure matters: defining system boundaries, designing backend workflows, and integrating services cleanly. Most of my work is in <span class="chip">Spring Boot</span> <span class="chip">Node.js</span> <span class="chip">Firebase</span> and <span class="chip">Docker</span>, from a health-tech capstone to a peer-reviewed research platform.</p>
+  </section>
+
+  <section id="research">
+    <div class="mono" data-k="e1">Research &amp; publication</div>
+    <h2 class="rise">VidSumEval</h2>
+    <div class="research spot" data-p="VidSumEval">
+      <div>
+        <div class="mono" style="color:var(--accent)" data-k="r0">Published · 41st IEEE/ACM ASE 2026 · Tools and Datasets Track · Artifact: Available, Functional</div>
+        <h3 style="margin-top:10px" data-k="r1">A Web Platform and Benchmark for Evaluating AI-Generated Programming Video Summaries</h3>
+        <p data-k="r2">Co-authored the paper and led the benchmark evaluation design: corpus curation, study methodology, metric selection, participant evaluation, and result analysis. Co-developed the platform in Node.js, Express, and SQLite.</p>
+        <div class="links">
+          <a href="https://doi.org/10.1145/3832783.3834594" target="_blank" rel="noreferrer" data-k="l1">Paper ↗</a>
+          <a href="https://progsumeval.onrender.com" target="_blank" rel="noreferrer" data-k="l2">Live demo ↗</a>
+          <a href="https://doi.org/10.5281/zenodo.21763079" target="_blank" rel="noreferrer" data-k="l3">Dataset ↗</a>
+          <a href="https://github.com/Ivve33/VidSumEval" target="_blank" rel="noreferrer">GitHub ↗</a>
+        </div>
+      </div>
+      <div class="stats" id="stats">
+        <div><strong data-n="10">10</strong><span data-k="s1">programming tutorials</span></div>
+        <div><strong data-n="20">20</strong><span data-k="s2">AI-generated summaries</span></div>
+        <div><strong data-n="50">50</strong><span data-k="s3">quiz items</span></div>
+        <div><strong data-n="60">60</strong><span data-k="s4">evaluation records</span></div>
+        <div><strong data-n="20">20</strong><span data-k="s5">participants</span></div>
+      </div>
+    </div>
+    <div class="demo web" data-demo="v"></div>
+  </section>
+
+  <section id="projects">
+    <div class="mono" data-k="e2">Selected work</div>
+    <h2 class="rise" data-k="h2">Projects</h2>
+    <div class="feat" data-p="RepoCare" id="repocare">
+      <div class="mono" data-k="p0">Featured capstone · Team Lead · Backend &amp; Architecture</div>
+      <h3 style="font:300 2.2rem/1.2 var(--display);margin-top:6px">RepoCare</h3>
+      <div style="color:var(--muted)" data-k="p1">AI-powered health insight platform</div>
+      <div class="duo">
+      <div class="demo phone" data-demo="r"></div>
+      <div>
+      <div class="mono" data-k="p6">Follow a medical report through the pipeline</div>
+      <div class="pipe" id="pipe" role="tablist" aria-label="Medical report pipeline">
+        <button type="button" role="tab">PDF upload</button><button type="button" role="tab">Extract / OCR</button><button type="button" role="tab">Panel detection</button><button type="button" role="tab">Normalization</button><button type="button" role="tab">Firestore</button>
+      </div>
+      <div class="stepinfo" id="stepinfo" role="tabpanel"></div>
+      <ul>
+        <li data-k="p2">Lead a five-member team: technical ownership, GitHub workflows, shared API contracts, and architecture documentation across backend, mobile, AI, and hardware.</li>
+        <li data-k="p3">Designed the layered, contract-first architecture across Flutter, Spring Boot, Firebase, AI, and hardware.</li>
+        <li data-k="p4">Built the Spring Boot backend with Firebase ID token verification, Firestore, and Storage, deployed through an automated Docker/Render CI/CD pipeline.</li>
+      </ul>
+      </div>
+      </div>
+    </div>
+    <div class="feat" data-p="Rafiq Alhaj" id="rafiq">
+      <div class="mono" data-k="q0">Hackathon · Product development · Nov 2026</div>
+      <h3 style="font:300 2.2rem/1.2 var(--display);margin-top:6px" data-k="q1">Rafiq Alhaj</h3>
+      <div class="award">🏆 <span data-k="q2">Top 20 of 150+ teams · Hajj Future Innovations Camp 2026 · SAR 25,000 award</span></div>
+      <div class="duo">
+      <div class="demo phone" data-demo="h"></div>
+      <div>
+      <p style="color:var(--muted);max-width:60ch;margin:4px 0 12px" data-k="q3">An installable app that relays campaign-leader instructions to every pilgrim and guides them back to their group, even without internet. Built and tested during the camp at the Hajj Conference &amp; Exhibition in Jeddah.</p>
+      <ul>
+        <li data-k="q4">Offline-first PWA: the app shell and campaign info are cached on the phone, so it opens with no connection.</li>
+        <li data-k="q5">“I’m lost” button: direction and distance to the assembly point by GPS, no map download needed.</li>
+        <li data-k="q6">Help requests are queued on the device and resent once on reconnect, with an SMS fallback to the leader.</li>
+        <li data-k="q7">Leader dashboard on Supabase Realtime: live “understood” and arrival counters, and translated broadcasts.</li>
+      </ul>
+      <div class="tags" style="margin-top:16px"><span>React</span><span>Vite</span><span>Tailwind</span><span>Supabase</span><span>PWA</span><span>Leaflet</span></div>
+      <div class="links" style="margin-top:16px">
+        <a href="https://rafiq-alhaj-nine.vercel.app" target="_blank" rel="noreferrer" data-k="q8">Try the app ↗</a>
+        <a href="https://github.com/ameer389/rafiq-alhaj" target="_blank" rel="noreferrer">GitHub ↗</a>
+      </div>
+      </div>
+      </div>
+      <div class="gallery">
+        <figure class="tall"><img src="assets/rafiq/stage.webp" alt="Winning teams on stage at the closing ceremony" loading="lazy" style="object-position:50% 85%"><figcaption data-k="g1">Closing ceremony</figcaption></figure>
+        <figure class="wide"><img src="assets/rafiq/me-app.webp" alt="Ameer next to Rafiq Alhaj running on the exhibition screen" loading="lazy" style="object-position:50% 75%"><figcaption data-k="g2">Live demo at the exhibition</figcaption></figure>
+        <figure class="wide"><img src="assets/rafiq/bootcamp.webp" alt="Team at the Innovations Bootcamp stand" loading="lazy"><figcaption data-k="g3">Innovations Bootcamp</figcaption></figure>
+        <figure class="wide"><img src="assets/rafiq/stats.webp" alt="Camp results screen: 150+ registrants, 40 projects, 20 teams" loading="lazy"><figcaption data-k="g4">150+ teams, 20 finalists</figcaption></figure>
+        <figure class="wide"><img src="assets/rafiq/booth.webp" alt="Team at the University of Jeddah booth" loading="lazy"><figcaption data-k="g5">University of Jeddah booth</figcaption></figure>
+      </div>
+    </div>
+    <div class="feat" data-p="Smart Outing Planner">
+      <div class="mono" data-k="c1a">Full-stack web · Backend</div>
+      <h3 style="font:300 2.2rem/1.2 var(--display);margin-top:6px">Smart Outing Planner</h3>
+      <p style="color:var(--muted);max-width:68ch;margin:8px 0 12px" data-k="c1">Backend and Firebase integration for a web app that generates personalized outing plans. API routes, validation, and Firestore workflows for activities, saved plans, users, and contact messages.</p>
+      <div class="tags"><span>Node.js</span><span>Express</span><span>JavaScript</span><span>Firebase</span></div>
+      <div class="demo web" data-demo="s"></div>
+    </div>
+    <div class="grid2">
+      <article class="card spot" data-p="BizCo System">
+        <div class="mono" data-k="c2a">Architecture design</div>
+        <h3 style="margin-top:6px">BizCo System</h3>
+        <p data-k="c2">Architecture of a brokerage information system: architecturally significant requirements, quality-attribute scenarios, utility-tree prioritization, patterns, messaging, and trade-off analysis.</p>
+        <div class="tags"><span>Software Architecture</span><span>System Design</span><span>Quality Attributes</span></div>
+      </article>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="mono" data-k="e3">Technical toolkit</div>
+    <h2 class="rise" data-k="h3">Skills</h2>
+    <div class="skills" id="skillGrid">
+      <div><h3 data-k="k1">Programming</h3><div class="tags"><span data-u="RepoCare">Java</span><span>C</span><span>Python</span><span data-u="Smart Outing Planner|VidSumEval">JavaScript</span><span>SQL</span></div></div>
+      <div><h3 data-k="k2">Backend</h3><div class="tags"><span data-u="RepoCare">Spring Boot</span><span data-u="Smart Outing Planner|VidSumEval">Node.js</span><span data-u="Smart Outing Planner|VidSumEval">Express</span><span data-u="RepoCare|Smart Outing Planner">REST API Design</span></div></div>
+      <div><h3 data-k="k3">Frontend</h3><div class="tags"><span data-u="Rafiq Alhaj">React</span><span data-u="Rafiq Alhaj">Vite</span><span data-u="Rafiq Alhaj">Tailwind CSS</span><span data-u="Rafiq Alhaj">PWA</span><span>HTML</span><span>CSS</span></div></div>
+      <div><h3 data-k="k4">Data &amp; cloud</h3><div class="tags"><span data-u="RepoCare">Firebase Auth</span><span data-u="RepoCare|Smart Outing Planner">Firestore</span><span data-u="RepoCare">Firebase Storage</span><span data-u="VidSumEval">SQLite</span><span data-u="Rafiq Alhaj">Supabase</span></div></div>
+      <div><h3 data-k="k5">DevOps &amp; tools</h3><div class="tags"><span>Git</span><span data-u="RepoCare">Docker</span><span>Maven</span><span data-u="RepoCare">Render</span><span data-u="RepoCare">CI/CD</span><span data-u="Rafiq Alhaj">Vercel</span><span data-u="RepoCare|Rafiq Alhaj">Claude Code</span><span data-u="RepoCare">Codex</span></div></div>
+      <div><h3 data-k="k6">Software engineering</h3><div class="tags"><span data-u="RepoCare|BizCo System">Software Architecture</span><span data-u="RepoCare|BizCo System">System Design</span><span>Agile/Scrum</span><span>Requirements Engineering</span></div></div>
+    </div>
+    <div class="used" id="used" aria-live="polite"></div>
+  </section>
+
+  <section id="climb">
+    <div class="mono" data-k="e4">Education &amp; recognition</div>
+    <h2 class="rise" data-k="h4">The climb so far</h2>
+    <svg class="profile" id="profile" viewBox="0 0 1000 230" role="img" aria-label="Milestones drawn as a mountain trail">
+      <path class="hill" d="M0 230 L0 205 L60 195 L170 175 L300 150 L400 140 L500 112 L600 100 L680 82 L760 74 L840 52 L900 44 L940 26 L970 60 L1000 90 L1000 230 Z"/>
+      <path class="base" d="M60 195 L300 150 L500 112 L680 82 L840 52 L940 26"/>
+      <path class="trail" id="trail" pathLength="1" d="M60 195 L300 150 L500 112 L680 82 L840 52 L940 26"/>
+      <circle cx="60" cy="195" r="8"/><circle cx="260" cy="157" r="8"/><circle cx="420" cy="136" r="8"/><circle cx="580" cy="102" r="8"/><circle cx="720" cy="78" r="8"/><circle cx="840" cy="52" r="8"/><circle cx="940" cy="26" r="8"/>
+    </svg>
+    <ol class="way" id="way">
+      <li><h3 data-k="w1">Started Software Engineering</h3><p data-k="w1b">2023 · University of Jeddah. GPA 4.94/5.00 with Academic Excellence Certificates across consecutive semesters.</p></li>
+      <li><h3>Agile Foundations</h3><p data-k="w2b">Sep 2025 · LinkedIn Learning</p><a href="files/Agile_Foundations_Certificate.pdf" target="_blank" rel="noreferrer" data-k="cert">View certificate ↗</a></li>
+      <li><h3 data-k="w3">First Place, 3MP</h3><p data-k="w3b">2026 · Project in Three Minutes competition, University of Jeddah</p></li>
+      <li><h3>Agentic AI</h3><p data-k="w4b">Aug 2026 · Saudi Digital Academy. Agentic and multi-agent workflows with n8n.</p><a href="files/Agentic_AI_Certificate.pdf" target="_blank" rel="noreferrer" data-k="cert2">View certificate ↗</a></li>
+      <li><h3 data-k="w5">Paper published at ASE 2026</h3><p data-k="w5b">Oct 2026 · 41st IEEE/ACM International Conference on Automated Software Engineering</p></li>
+      <li><h3 data-k="w7">Top 20, Hajj Innovations Camp</h3><p data-k="w7b">Nov 2026 · Rafiq Alhaj, chosen among 150+ teams, SAR 25,000 award</p></li>
+      <li><h3 data-k="w6">Next: CO-OP</h3><p data-k="w6b">January 2027 · Arabic (native), English (upper-intermediate)</p></li>
+    </ol>
+  </section>
+
+  <div class="contact" id="contact">
+    <div class="mono" data-k="e5">Get in touch</div>
+    <h2 class="rise" data-k="h5">Open to Software Engineering CO-OP opportunities.</h2>
+    <p data-k="ct">Available from January 2027, anywhere in Saudi Arabia. Main interest: backend development and software architecture.</p>
+    <div class="mail"><a href="mailto:ameeralghamdi400@gmail.com" style="text-decoration:none"><code id="mail">ameeralghamdi400@gmail.com</code></a><button class="btn" id="copyBtn" type="button" data-k="copy">Copy email</button></div>
+    <div class="links">
+      <a href="https://www.linkedin.com/in/ameer-alghamdi" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+      <a href="https://github.com/ameer389" target="_blank" rel="noreferrer">GitHub ↗</a>
+    </div>
+  </div>
+</main>
+<canvas class="ridgefoot" id="ridgefoot" aria-hidden="true"></canvas>
+<footer><div class="wrap"><span>© 2026 Ameer Ahmed Alghamdi</span><a href="#home" data-k="top">Back to top ↑</a></div></footer>
+<div class="alt" id="alt" aria-hidden="true"><span id="altN">0</span> m</div>
+
+<script>
+(function(){
+var root=document.documentElement, reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function tok(n){return getComputedStyle(root).getPropertyValue(n).trim()}
+function rnd(seed){return function(){seed=(seed*16807)%2147483647;return (seed-1)/2147483646}}
+function $(id){return document.getElementById(id)}
+
+/* ---------- language ---------- */
+var AR={
+brand:'أمير الغامدي',
+n1:'الأبحاث',n2:'المشاريع',n3:'المهارات',n4:'الرحلة',n5:'تواصل',
+m1:'هندسة البرمجيات',m2:'جدة، السعودية',avail:'تدريب تعاوني من يناير 2027',name:'أمير<br><em>الغامدي</em>',
+lead:'تطوير الواجهات الخلفية، ومعمارية البرمجيات، وأنظمة تبقى هادئة تحت الضغط.',
+cta1:'شاهد المشاريع',cta2:'تحميل السيرة الذاتية',
+f1:'المعدل التراكمي، جامعة جدة',f2:'ورقة بحثية منشورة',f3:'معسكر مستقبل ابتكارات الحج 2026',f4a:'المركز الأول',f4:'مسابقة مشروع في ثلاث دقائق',
+e0:'نبذة',
+about:'أحب الجوانب اللي يكون فيها للبنية وزن في هندسة البرمجيات: تحديد حدود النظام، وتصميم سير العمل في الواجهة الخلفية، وربط الخدمات بشكل نظيف. أغلب شغلي على <span class="chip">Spring Boot</span> <span class="chip">Node.js</span> <span class="chip">Firebase</span> و <span class="chip">Docker</span>، من مشروع تخرج في التقنية الصحية إلى منصة بحثية محكّمة.',
+e1:'البحث والنشر',
+r0:'منشورة · المؤتمر الدولي الـ41 IEEE/ACM ASE 2026 · مسار الأدوات والبيانات · شارتا Available وFunctional',
+r1:'منصة ويب ومعيار لتقييم ملخصات فيديوهات البرمجة المولّدة بالذكاء الاصطناعي',
+r2:'شاركت في تأليف الورقة وقدت تصميم تقييم المعيار: اختيار المحتوى، ومنهجية الدراسة، واختيار المقاييس، وتقييم المشاركين، وتحليل النتائج. وشاركت في تطوير المنصة باستخدام Node.js وExpress وSQLite.',
+l1:'الورقة ↗',l2:'تجربة حية ↗',l3:'البيانات ↗',
+s1:'دروس برمجة',s2:'ملخصات مولّدة بالذكاء الاصطناعي',s3:'أسئلة اختبار',s4:'سجلات تقييم',s5:'مشاركين',
+e2:'أعمال مختارة',h2:'المشاريع',
+p0:'مشروع التخرج · قائد الفريق · الواجهة الخلفية والمعمارية',p1:'منصة تحليلات صحية مدعومة بالذكاء الاصطناعي',
+p6:'تتبّع التقرير الطبي خطوة بخطوة',
+p2:'أقود فريق من خمسة أعضاء: توزيع المسؤوليات التقنية، وسير العمل على GitHub، وعقود الـAPI المشتركة، وتوثيق المعمارية بين الواجهة الخلفية والجوال والذكاء الاصطناعي والعتاد.',
+p3:'صممت معمارية متعددة الطبقات تبدأ من العقود بين Flutter وSpring Boot وFirebase والذكاء الاصطناعي والعتاد.',
+p4:'بنيت الواجهة الخلفية بـSpring Boot مع التحقق من رموز Firebase، وFirestore، وStorage، ونشرتها عبر مسار CI/CD آلي باستخدام Docker وRender.',
+c1a:'تطبيق ويب متكامل · الواجهة الخلفية',
+c1:'الواجهة الخلفية وربط Firebase لتطبيق ويب يولّد خطط طلعات حسب تفضيلات المستخدم. مسارات API، وتحقق من المدخلات، وسير عمل Firestore للأنشطة والخطط المحفوظة والمستخدمين ورسائل التواصل.',
+c2a:'تصميم معماري',
+c2:'معمارية نظام معلومات للوساطة المالية: المتطلبات المؤثرة معمارياً، وسيناريوهات خصائص الجودة، وترتيب الأولويات بشجرة المنفعة، والأنماط، والمراسلة، وتحليل المفاضلات.',
+q0:'هاكاثون · تطوير المنتج · نوفمبر 2026',q1:'رفيق الحاج',
+q2:'ضمن أفضل 20 من أكثر من 150 فريقًا · معسكر مستقبل ابتكارات الحج 2026 · جائزة 25,000 ريال',
+q3:'تطبيق يوصل تعليمات قائد الحملة لكل حاج، ويرشده إلى مجموعته حتى دون إنترنت. بُني وجُرّب خلال المعسكر في مؤتمر ومعرض الحج بجدة.',
+q4:'تطبيق PWA يعمل دون إنترنت: واجهة التطبيق وبيانات الحملة محفوظة على الجوال، فيفتح دون اتصال.',
+q5:'زر «أنا ضائع»: اتجاه ومسافة نقطة التجمع عبر GPS دون الحاجة لتحميل الخريطة.',
+q6:'طلبات المساعدة تُحفظ على الجهاز وتُرسل مرة واحدة عند عودة الاتصال، مع بديل SMS للقائد.',
+q7:'لوحة القائد على Supabase Realtime: عدّاد مباشر لمن فهم ومن وصل، ورسائل مترجمة.',
+q8:'جرّب التطبيق ↗',g1:'الحفل الختامي',g2:'عرض حي في المعرض',g3:'معسكر الابتكارات',g4:'أكثر من 150 فريقًا و20 متأهلًا',g5:'جناح جامعة جدة',
+e3:'الأدوات التقنية',h3:'المهارات',
+k1:'لغات البرمجة',k2:'الواجهة الخلفية',k3:'الواجهات الأمامية',k4:'البيانات والسحابة',k5:'الأدوات و DevOps',k6:'هندسة البرمجيات',
+e4:'التعليم والتكريم',h4:'الصعود إلى الآن',
+w1:'بداية هندسة البرمجيات',w1b:'2023 · جامعة جدة. معدل 4.94 من 5 مع شهادات التفوق الأكاديمي في فصول متتالية.',
+w2b:'سبتمبر 2025 · LinkedIn Learning',
+w3:'المركز الأول، 3MP',w3b:'2026 · مسابقة مشروع في ثلاث دقائق، جامعة جدة',
+w4b:'أغسطس 2026 · الأكاديمية السعودية الرقمية. سير عمل الوكلاء والوكلاء المتعددين باستخدام n8n.',
+w5:'نشر الورقة في ASE 2026',w5b:'أكتوبر 2026 · المؤتمر الدولي الـ41 IEEE/ACM لهندسة البرمجيات المؤتمتة',
+w7:'أفضل 20 في معسكر ابتكارات الحج',w7b:'نوفمبر 2026 · رفيق الحاج، من بين أكثر من 150 فريقًا، جائزة 25,000 ريال',cert:'عرض الشهادة ↗',cert2:'عرض الشهادة ↗',w6:'القادم: التدريب التعاوني',w6b:'يناير 2027 · العربية (اللغة الأم)، الإنجليزية (فوق المتوسط)',
+e5:'تواصل معي',h5:'متاح لفرص التدريب التعاوني في هندسة البرمجيات.',
+ct:'متاح من يناير 2027 في أي مدينة بالسعودية. اهتمامي الأساسي: تطوير الواجهات الخلفية ومعمارية البرمجيات.',
+copy:'انسخ الإيميل',top:'للأعلى ↑'};
+var STEPS={en:[
+ ['Step 1 of 5','The report is uploaded and queued. Processing is asynchronous, so the app never waits on it.'],
+ ['Step 2 of 5','Text is extracted natively from the PDF. Scanned reports fall back to OCR.'],
+ ['Step 3 of 5','Lab panels are detected and parsed into individual results.'],
+ ['Step 4 of 5','Biomarker names and units are normalized, then validated.'],
+ ['Step 5 of 5','Clean results are saved to Firestore, ready for the app to read.']],
+ar:[
+ ['الخطوة 1 من 5','يُرفع التقرير ويدخل قائمة الانتظار. المعالجة غير متزامنة، فالتطبيق ما ينتظرها.'],
+ ['الخطوة 2 من 5','يُستخرج النص مباشرة من ملف PDF. والتقارير الممسوحة ضوئياً تتحول إلى OCR.'],
+ ['الخطوة 3 من 5','تُكتشف مجموعات التحاليل وتُفصّل إلى نتائج مفردة.'],
+ ['الخطوة 4 من 5','تُوحّد أسماء المؤشرات الحيوية ووحداتها، ثم يُتحقق منها.'],
+ ['الخطوة 5 من 5','تُحفظ النتائج النظيفة في Firestore جاهزة للتطبيق.']]};
+var UI={en:{hint:'Pick a highlighted skill to see where I used it.',used:'used in',night:'Night',day:'Day',copied:'Copied'},
+        ar:{hint:'اختر مهارة مميّزة عشان تشوف وين استخدمتها.',used:'استُخدمت في',night:'ليل',day:'نهار',copied:'تم النسخ'}};
+var EN={}, nodes=document.querySelectorAll('[data-k]'), lang='en';
+nodes.forEach(function(n){EN[n.dataset.k]=n.innerHTML});
+function isNight(){return tok('--night')==='1'}
+function themeLabel(){$('themeBtn').textContent=isNight()?UI[lang].day:UI[lang].night}
+
+/* about: words brighten with the scroll */
+var aboutEl=$('aboutText');
+function splitWords(){var out=[];aboutEl.childNodes.forEach(function(c){
+  if(c.nodeType===3){c.textContent.split(/(\s+)/).forEach(function(w){if(!w)return;if(/^\s+$/.test(w))out.push(document.createTextNode(w));else{var s=document.createElement('span');s.className='w';s.textContent=w;out.push(s)}})}
+  else{c.classList.add('w');out.push(c)}});aboutEl.replaceChildren.apply(aboutEl,out);light()}
+function light(){var ws=aboutEl.querySelectorAll('.w'),r=aboutEl.getBoundingClientRect(),vh=innerHeight;
+  var p=(vh*.9-r.top)/(r.height+vh*.4);p=Math.max(0,Math.min(1,p));var k=Math.round(p*ws.length);ws.forEach(function(w,i){w.classList.toggle('on',reduce||i<k)})}
+
+/* pipeline stepper */
+var tabs=[].slice.call($('pipe').children),step=0,auto=null;
+function setStep(i){step=i;tabs.forEach(function(b,j){b.setAttribute('aria-selected',j===i);b.classList.toggle('done',j<i)});
+  var s=STEPS[lang][i];$('stepinfo').innerHTML='<b>'+s[0]+'</b>'+s[1]}
+tabs.forEach(function(b,i){b.addEventListener('click',function(){setStep(i);var d=DEMOS.r;if(d&&d.go){d.pause(true);d.go([5,7,8,9,10][i])}})});
+
+/* walkthroughs: screens advance on their own, with a tap mark where the user presses */
+var DEMOS={
+ r:{n:11,url:'RepoCare',taps:[[50,65],[50,97],[50,93],[50,72],[79,65],[50,13],[50,87],[50,23],[50,72],0,0],pipe:{5:0,6:0,7:1,8:2,9:3,10:4},
+  en:['Welcome screen. The user starts onboarding.','Creates an account in three short steps.','Picks health conditions and goals to personalize the insights.','Chooses what data may be processed. Consent comes first.','Home stays empty until the first report arrives.','Uploads a lab report as a PDF or a photo.','Sets the report type and date, then submits.','The backend processes it asynchronously. The app shows it as in progress.','Panels are detected and each result is classified.','Every biomarker is placed against its reference range.','Out-of-range results raise an alert.'],
+  ar:['شاشة الترحيب. المستخدم يبدأ التسجيل.','ينشئ حساب في ثلاث خطوات قصيرة.','يختار حالاته وأهدافه الصحية عشان تتخصص له التحليلات.','يحدد أي بيانات يُسمح بمعالجتها. الموافقة أولاً.','الرئيسية تبقى فاضية إلى أن يوصل أول تقرير.','يرفع تقرير المختبر كملف PDF أو صورة.','يحدد نوع التقرير وتاريخه ثم يرسله.','الواجهة الخلفية تعالجه بشكل غير متزامن، والتطبيق يعرضه قيد المعالجة.','تُكتشف مجموعات التحاليل وتُصنّف كل نتيجة.','كل مؤشر حيوي يُوضع مقابل نطاقه المرجعي.','النتائج خارج النطاق تطلع كتنبيه.']},
+ s:{n:9,url:'smart-outing-planner',taps:[[17,95],[61,40],[18,85],[35,73],[76,69],[76,25],[15,23],0,0],
+  en:['Landing page. The user starts a new plan.','Signs up or logs in.','Chooses who is coming along.','Sets the time of day and the budget tier.','The planner returns the best match.','The outing drawn as a timed route of stops.','Cost breakdown for each stop.','The full itinerary, stop by stop.','Saved plans stay in the user\'s archive.'],
+  ar:['الصفحة الرئيسية. المستخدم يبدأ خطة جديدة.','يسجل حساب جديد أو يدخل.','يختار مع مين الطلعة.','يحدد وقت الطلعة وفئة الميزانية.','المخطِّط يرجّع أفضل خطة مطابقة.','الطلعة مرسومة كمسار محطات بأوقاتها.','تفصيل التكلفة لكل محطة.','البرنامج كامل، محطة محطة.','الخطط المحفوظة تبقى في أرشيف المستخدم.']},
+ h:{n:10,url:'Rafiq Alhaj',taps:[[50,30],[50,90],[50,45],[50,45],[50,45],[50,88],[50,85],[50,88],[50,30],0],
+  en:['Pilgrim picks a language.','Confirms the campaign group by code.','Home: assembly point, time, and the big red “I\'m lost” button.','Still works offline, with cached campaign info.','“I\'m lost” offers the way back or help from the leader.','Direction and distance to the gate, even without internet.','No connection: the help request is saved on the phone.','Request delivered; the pilgrim follows each step.','Leader sees new help requests live.','Leader tracks who has arrived at the assembly point.'],
+  ar:['الحاج يختار لغته.','يؤكد مجموعة الحملة بالرمز.','الرئيسية: نقطة التجمع وموعدها، وزر «أنا ضائع» الأحمر.','يعمل دون إنترنت ببيانات الحملة المحفوظة.','«أنا ضائع» يعرض طريق العودة أو طلب المساعدة من القائد.','اتجاه ومسافة البوابة حتى دون إنترنت.','دون اتصال: يُحفظ طلب المساعدة على الجوال.','وصل الطلب، والحاج يتابع كل خطوة.','القائد يرى طلبات المساعدة مباشرة.','القائد يتابع من وصل إلى نقطة التجمع.']},
+ v:{n:5,url:'progsumeval.onrender.com',taps:[[11,68],[87,5],0,0,[91,43]],
+  en:['The benchmark browser home.','Browse the 10 original programming tutorials.','Aggregated results across 60 evaluation records.','NotebookLM and VEED compared per engine and per video.','Request a new tutorial by searching YouTube.'],
+  ar:['الصفحة الرئيسية لمتصفح المعيار.','تصفح دروس البرمجة العشرة الأصلية.','النتائج المجمّعة من 60 سجل تقييم.','مقارنة NotebookLM و VEED لكل محرك ولكل فيديو.','طلب درس جديد بالبحث في يوتيوب.']}
+};
+var DUR=3200;
+document.querySelectorAll('.demo').forEach(function(el){
+  var k=el.dataset.demo,D=DEMOS[k],web=el.classList.contains('web'),i=0,timer=null,tapT=null,playing=false,userPaused=false;
+  var h=web?'<div class="chrome"><i></i><i></i><i></i><span>'+D.url+'</span></div>':'';
+  h+='<div class="frame">';for(var j=1;j<=D.n;j++)h+='<img src="shots/'+k+j+'.webp" alt="" '+(j>1?'loading="lazy"':'')+'>';
+  h+='<span class="tap"></span></div><div class="segs">';for(j=0;j<D.n;j++)h+='<button type="button" aria-label="Screen '+(j+1)+'"></button>';
+  h+='</div><div class="cap"><b></b><span></span><button class="pp" type="button"></button></div>';el.innerHTML=h;el.style.setProperty('--dur',DUR+'ms');
+  var imgs=el.querySelectorAll('img'),segs=el.querySelectorAll('.segs button'),tap=el.querySelector('.tap'),cap=el.querySelector('.cap'),pp=el.querySelector('.pp');
+  function label(){pp.textContent=playing?(lang==='ar'?'إيقاف':'Pause'):(lang==='ar'?'تشغيل':'Play')}
+  function show(n){i=(n+D.n)%D.n;imgs.forEach(function(m,j){m.classList.toggle('on',j===i);if(j===i||j===i+1)m.loading='eager'});
+    segs.forEach(function(b,j){b.classList.remove('now');b.classList.toggle('past',j<i);if(j===i){void b.offsetWidth;b.classList.add(playing?'now':'past')}});
+    cap.firstChild.textContent=(i+1)+' / '+D.n;cap.children[1].textContent=D[lang][i];tap.classList.remove('go');
+    if(D.pipe&&D.pipe[i]!=null)setStep(D.pipe[i]);
+    clearTimeout(timer);clearTimeout(tapT);
+    if(playing){var t=D.taps[i];if(t)tapT=setTimeout(function(){tap.style.left=(root.dir==='rtl'&&!web?t[0]:t[0])+'%';tap.style.top=t[1]+'%';void tap.offsetWidth;tap.classList.add('go')},DUR-1100);
+      timer=setTimeout(function(){show(i+1)},DUR)}}
+  function play(){if(playing||reduce)return;playing=true;el.classList.remove('paused');label();show(i)}
+  function pause(byUser){if(byUser)userPaused=true;playing=false;el.classList.add('paused');clearTimeout(timer);clearTimeout(tapT);label();segs[i].classList.remove('now');segs[i].classList.add('past')}
+  segs.forEach(function(b,j){b.addEventListener('click',function(){pause(true);show(j)})});
+  pp.addEventListener('click',function(){if(playing)pause(true);else{userPaused=false;play()}});
+  D.go=function(n){show(n)};D.pause=pause;D.relabel=function(){label();cap.children[1].textContent=D[lang][i]};
+  show(0);label();
+  if('IntersectionObserver' in window&&!reduce){new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){if(!userPaused)play()}else if(playing)pause(false)})},{threshold:.5}).observe(el)}
+});
+
+/* skills ↔ projects */
+var used=$('used'),hot=null;
+function showSkill(el){
+  if(hot)hot.classList.remove('hot');document.querySelectorAll('.proj-hot').forEach(function(p){p.classList.remove('proj-hot')});
+  if(!el){hot=null;used.textContent=UI[lang].hint;return}
+  hot=el;el.classList.add('hot');var ps=el.dataset.u.split('|');
+  used.innerHTML='<b>'+el.textContent+'</b> · '+UI[lang].used+' '+ps.join(lang==='ar'?' و ':' and ');
+  ps.forEach(function(p){var t=document.querySelector('[data-p="'+p+'"]');if(t)t.classList.add('proj-hot')})}
+document.querySelectorAll('#skillGrid [data-u]').forEach(function(s){s.tabIndex=0;s.setAttribute('role','button');
+  ['pointerenter','focus','click'].forEach(function(ev){s.addEventListener(ev,function(){showSkill(s)})})});
+$('skillGrid').addEventListener('pointerleave',function(){showSkill(null)});
+
+function setLang(l){lang=l;var d=l==='ar'?AR:EN;
+  nodes.forEach(function(n){if(d[n.dataset.k]!=null)n.innerHTML=d[n.dataset.k]});
+  root.lang=l;root.dir=l==='ar'?'rtl':'ltr';$('langBtn').textContent=l==='ar'?'English':'عربي';
+  themeLabel();splitWords();setStep(step);showSkill(null);for(var k in DEMOS)if(DEMOS[k].relabel)DEMOS[k].relabel()}
+$('langBtn').addEventListener('click',function(){setLang(lang==='en'?'ar':'en')});
+$('themeBtn').addEventListener('click',function(){root.dataset.theme=isNight()?'light':'dark';themeLabel();readColors();drawFoot();if(reduce)frame(0)});
+$('copyBtn').addEventListener('click',function(){var b=this,m=$('mail');
+  function ok(){b.textContent=UI[lang].copied;setTimeout(function(){b.textContent=(lang==='ar'?AR:EN).copy},1600)}
+  function sel(){var r=document.createRange();r.selectNodeContents(m);var s=getSelection();s.removeAllRanges();s.addRange(r)}
+  try{navigator.clipboard.writeText(m.textContent).then(ok,sel)}catch(e){sel()}});
+
+/* pointer: page glow + card spotlight */
+var glow=$('glow');
+addEventListener('pointermove',function(e){tmx=(e.clientX/innerWidth-.5)*2;glow.style.opacity=1;glow.style.transform='translate('+e.clientX+'px,'+e.clientY+'px)';
+  var c=e.target.closest&&e.target.closest('.spot');if(c){var r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px')}},{passive:true});
+
+/* things that start when seen */
+function seen(el,fn,th){if(!('IntersectionObserver' in window)){fn();return}new IntersectionObserver(function(es,o){es.forEach(function(e){if(e.isIntersecting){fn();o.disconnect()}})},{threshold:th||.4}).observe(el)}
+if(!reduce){
+  document.querySelectorAll('.rise').forEach(function(h){var r=h.getBoundingClientRect();if(r.top>innerHeight){h.classList.add('wait');seen(h,function(){h.classList.remove('wait')},.2)}});
+  seen($('stats'),function(){document.querySelectorAll('#stats [data-n]').forEach(function(s){var n=+s.dataset.n,t0=performance.now();(function tick(t){var p=Math.min(1,(t-t0)/1100);s.textContent=Math.round(n*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(tick)})(t0)})});
+}
+
+/* trail draws with the scroll; waypoints answer hover */
+var trail=$('trail'),dots=[].slice.call(document.querySelectorAll('#profile circle')),stops=[0,.22,.38,.55,.7,.85,1];
+function climb(){var r=$('profile').getBoundingClientRect(),p=(innerHeight*.85-r.top)/(r.height+innerHeight*.25);p=reduce?1:Math.max(0,Math.min(1,p));
+  trail.style.strokeDashoffset=1-p;dots.forEach(function(d,i){d.style.fill=p>=stops[i]-.01?'var(--accent)':''})}
+[].slice.call($('way').children).forEach(function(li,i){li.addEventListener('pointerenter',function(){dots[i].classList.add('hot')});li.addEventListener('pointerleave',function(){dots[i].classList.remove('hot')})});
+
+/* altimeter: reading the page is the climb; the summit is 4,940 m, his GPA */
+function alt(){var max=document.documentElement.scrollHeight-innerHeight,p=max>0?Math.min(1,scrollY/max):0;$('altN').textContent=Math.round(p*4940).toLocaleString('en-US')}
+
+/* ---------- alpine scene ---------- */
+var cv=$('scene'),cx=cv.getContext('2d'),W=0,H=0,C={},mx=0,tmx=0,flakes=[],stars=[],visible=true;
+var layers=[
+ {base:.58,amp:.34,f:[.0038,.0087,.023],p:[1.2,4.1,.7],col:'--m1',par:.08,cap:.47},
+ {base:.69,amp:.32,f:[.0051,.0119,.029],p:[3.3,.9,2.2],col:'--m2',par:.16,cap:.56},
+ {base:.80,amp:.22,f:[.0064,.0150,.035],p:[.4,2.8,5.0],col:'--m3',par:.26,cap:0,haze:1},
+ {base:.89,amp:.10,f:[.0047,.0170,.041],p:[2.1,5.5,1.3],col:'--pine',par:.40,cap:0,trees:150,seed:11,size:[12,30],haze:1},
+ {base:.99,amp:.07,f:[.0034,.0100,0],p:[4.6,1.7,0],col:'--bg',par:.58,cap:0,trees:9,seed:53,size:[60,120],treeCol:'--pine2'}
+];
+layers.forEach(function(l){if(l.trees){var r=rnd(l.seed);l.t=[];for(var i=0;i<l.trees;i++)l.t.push([r(),l.size[0]+r()*(l.size[1]-l.size[0]),r()])}});
+function ridge(l,x){var v=0,a=[.55,.3,.15];for(var i=0;i<3;i++){if(l.f[i])v+=a[i]*(1-Math.abs(Math.sin(x*l.f[i]+l.p[i])))}return H*l.base-H*l.amp*v}
+function readColors(){['--sky1','--sky2','--m1','--m2','--m3','--pine','--pine2','--bg','--snow','--sun'].forEach(function(k){C[k]=tok(k)});C.night=isNight()}
+function size(){var d=Math.min(2,devicePixelRatio||1);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*d;cv.height=H*d;cx.setTransform(d,0,0,d,0,0);
+  var r=rnd(7);flakes=[];var n=Math.round(Math.min(90,W/13));for(var i=0;i<n;i++)flakes.push({x:r()*W,y:r()*H,r:.4+r()*1.1,s:.12+r()*.3,w:r()*6.28});
+  stars=[];for(i=0;i<90;i++)stars.push([r()*W,r()*H*.5,.3+r()*.9])}
+/* a spruce: narrow, many drooping tiers, slightly irregular */
+function spruce(c,x,y,h,col,j){var w=h*.17,n=Math.max(6,Math.round(h/7)),R=[],i,ty,ww;
+  for(i=1;i<=n;i++){ty=y-h+h*i/n;ww=w*Math.pow(i/n,.8)*(.8+.4*Math.abs(Math.sin(i*2.7+j*9)));R.push([ww,ty],[ww*.4,ty-h/n*.35])}
+  c.fillStyle=col;c.beginPath();c.moveTo(x,y-h);for(i=0;i<R.length;i++)c.lineTo(x+R[i][0],R[i][1]);c.lineTo(x,y);for(i=R.length-1;i>=0;i--)c.lineTo(x-R[i][0],R[i][1]);c.closePath();c.fill()}
+function frame(t){
+  mx+=(tmx-mx)*.04;var sc=Math.min(scrollY,H);
+  var g=cx.createLinearGradient(0,0,0,H);g.addColorStop(0,C['--sky1']);g.addColorStop(1,C['--sky2']);cx.fillStyle=g;cx.fillRect(0,0,W,H);
+  if(C.night){cx.fillStyle=C['--sun'];stars.forEach(function(s){cx.globalAlpha=.3+.5*Math.abs(Math.sin(t*.0005+s[0]));cx.beginPath();cx.arc(s[0],s[1],s[2],0,6.28);cx.fill()});cx.globalAlpha=1}
+  /* diffuse light behind the far ridge, no disc */
+  var sx=W*.74+mx*10,sy=H*.36,sr=Math.max(W,H)*.5,sg=cx.createRadialGradient(sx,sy,0,sx,sy,sr);sg.addColorStop(0,C['--sun']);sg.addColorStop(1,'transparent');cx.globalAlpha=C.night?.16:.55;cx.fillStyle=sg;cx.fillRect(0,0,W,H);cx.globalAlpha=1;
+  layers.forEach(function(l){
+    var ox=mx*l.par*60, oy=sc*l.par*.5,x,y;
+    cx.fillStyle=C[l.col];cx.beginPath();cx.moveTo(0,H);for(x=0;x<=W+3;x+=3)cx.lineTo(x,ridge(l,x+ox)+oy);cx.lineTo(W,H);cx.closePath();cx.fill();
+    if(l.cap){cx.fillStyle=C['--snow'];cx.globalAlpha=.9;var line=H*l.cap+oy;for(x=0;x<=W;x+=2){y=ridge(l,x+ox)+oy;if(y<line){var d=(line-y)*.45*(.6+.4*Math.sin((x+ox)*.031))+4*Math.sin((x+ox)*.19)+2*Math.sin((x+ox)*.63);if(d>0)cx.fillRect(x,y,2,d)}}cx.globalAlpha=1}
+    if(l.t){var col=C[l.treeCol||'--pine2'];l.t.forEach(function(tr){var span=W+240,tx=((tr[0]*span-ox)%span+span)%span-120;spruce(cx,tx,ridge(l,tx+ox)+oy+4,tr[1],col,tr[2])})}
+    if(l.haze){var f=cx.createLinearGradient(0,H*(l.base-.12),0,H*(l.base+.08));f.addColorStop(0,'transparent');f.addColorStop(1,C['--sky2']);cx.globalAlpha=C.night?.35:.6;cx.fillStyle=f;cx.fillRect(0,H*(l.base-.12)+oy,W,H*.2);cx.globalAlpha=1}
+  });
+  cx.fillStyle=C['--snow'];flakes.forEach(function(f){if(!reduce){f.y+=f.s;f.x+=Math.sin(t*.0005+f.w)*.2;if(f.y>H){f.y=-3;f.x=Math.random()*W}}cx.globalAlpha=.4+.3*Math.sin(f.w);cx.beginPath();cx.arc(f.x,f.y,f.r,0,6.28);cx.fill()});cx.globalAlpha=1;
+}
+function loop(t){if(visible)frame(t);requestAnimationFrame(loop)}
+
+/* footer: one quiet forested ridge */
+var rf=$('ridgefoot'),rc=rf.getContext('2d');
+function drawFoot(){var d=Math.min(2,devicePixelRatio||1),w=rf.clientWidth,h=rf.clientHeight;rf.width=w*d;rf.height=h*d;rc.setTransform(d,0,0,d,0,0);rc.clearRect(0,0,w,h);
+  var col=tok('--pine2'),r=rnd(41),x;function y(x){return h*.75-h*.3*(1-Math.abs(Math.sin(x*.004+1)))-h*.12*Math.sin(x*.013)}
+  rc.fillStyle=col;rc.beginPath();rc.moveTo(0,h);for(x=0;x<=w+3;x+=3)rc.lineTo(x,y(x));rc.lineTo(w,h);rc.closePath();rc.fill();
+  for(var i=0,n=Math.round(w/9);i<n;i++){x=r()*w;spruce(rc,x,y(x)+3,10+r()*20,col,r())}}
+
+addEventListener('scroll',function(){alt();light();climb();visible=scrollY<H+80;if(reduce)frame(0)},{passive:true});
+addEventListener('resize',function(){size();drawFoot();alt();light();climb();if(reduce)frame(0)});
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',function(){readColors();drawFoot();themeLabel()});
+readColors();size();drawFoot();alt();themeLabel();splitWords();setStep(0);showSkill(null);climb();
+if(reduce)frame(0);else requestAnimationFrame(loop);
+})();
+</script>
+
+</body></html>
